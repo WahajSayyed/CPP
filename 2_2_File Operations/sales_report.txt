@@ -1,0 +1,5 @@
+DAILY SALES REPORT
+==================
+Product        Quality   Price     
+Laptop         5         $1000.00
+Mouse          12        $30.00

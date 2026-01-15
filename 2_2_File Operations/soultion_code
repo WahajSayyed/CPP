@@ -1,0 +1,24 @@
+Task 2 Solution
+
+// To append to existing report, change:
+std::ofstream reportFile("sales_report.txt", std::ios::app);
+// Add timestamp for multiple reports:
+#include <ctime>
+// In main():
+std::time_t now = std::time(nullptr);
+reportFile << "Report generated: " << std::ctime(&now) << std::endl;
+
+
+
+Task 3 Solution
+
+// The complete solution handles file creation, reading, parsing, and summarizing
+// For enhanced error handling, add try-catch around std::stoi and std::stod:
+try {
+    int quantity = std::stoi(line.substr(firstComma + 1, secondComma - firstComma - 1));
+    double price = std::stod(line.substr(secondComma + 1));
+    // ... rest of processing
+} catch (const std::exception& e) {
+    std::cerr << "Error parsing line: " << line << std::endl;
+    continue;
+}
