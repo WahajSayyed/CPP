@@ -1,0 +1,1 @@
+g++ basic_JSON_library_integration.cpp -Ijson/include -o basic_JSON_library_integration
