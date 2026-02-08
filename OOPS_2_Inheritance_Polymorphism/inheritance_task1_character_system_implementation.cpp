@@ -93,35 +93,46 @@ public:
 };
 
 int main() {
-    cout << "=== Character ===" << endl;
-    Character c("Base Character", 100, 100);
-    c.getName();
-    c.displayStats();
-    c.getHealth();
-    cout << "================" << endl;
-    cout << "=== Warrior ===" << endl;
-    Warrior w("Warrior Character", 200, 250, 100);
-    w.getName();
-    w.displayStats();
-    w.getHealth();
-    w.attack();
-    cout << "================" << endl;
-    cout << "=== Mage ===" << endl;
-    Mage m("Mage Character", 300, 350, 50);
-    m.getName();
-    m.displayStats();
-    m.getHealth();
-    m.castSpell();
-    cout << "================" << endl;
+    cout << "=== Creating Characters ===" << endl;
+
+    // Base-class pointers to derived objects (polymorphism)
+    Character* party[2];
+    party[0] = new Warrior("Aragorn", 200, 120, 80);
+    party[1] = new Mage("Gandalf", 150, 100, 60);
+
+    cout << "\n=== Displaying Stats (Polymorphism) ===" << endl;
+    for (int i = 0; i < 2; ++i) {
+        party[i]->displayStats();   // runtime binding
+        cout << "-----------------------------" << endl;
+    }
+
+    cout << "\n=== Specialized Actions ===" << endl;
+
+    // Downcasting to access derived-specific behavior
+    Warrior* w = dynamic_cast<Warrior*>(party[0]);
+    if (w) {
+        w->attack();
+    }
+
+    Mage* m = dynamic_cast<Mage*>(party[1]);
+    if (m) {
+        m->castSpell();
+        m->castSpell();  // test mana reduction
+    }
+
+    cout << "\n=== Cleaning Up ===" << endl;
+    for (int i = 0; i < 2; ++i) {
+        delete party[i];  // virtual destructor in action
+    }
+
+    cout << "=== Program End ===" << endl;
+    return 0;
 }
+
 
 /*✅ Success Checklist
 Character base class properly encapsulates common attributes
-
 Warrior and Mage classes inherit correctly and add specialization
-
 Constructor chaining calls base class constructor first
-
 Access specifiers prevent inappropriate member access
-
 Virtual destructor ensures proper cleanup*/
